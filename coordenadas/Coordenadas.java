@@ -5,7 +5,7 @@ public class Coordenadas<X> {
 				  ordenadas;
 
 
-	public Coordenadas(int x, y){
+	public Coordenadas(int x,int y){
 
 		this.absissas = x;
 		this.ordenadas = y;
@@ -31,8 +31,8 @@ public class Coordenadas<X> {
 	public String toString(){
 		String ret = "(";
 
-		ret += new Integer (this.absissas).toString;
-		ret += "," + new Integer (this.ordenadas).toString;
+		ret += new Integer (this.absissas).toString();
+		ret += "," + new Integer (this.ordenadas).toString();
 		ret += ")";
 
 		return ret;
