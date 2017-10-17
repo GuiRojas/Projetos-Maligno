@@ -1,3 +1,5 @@
+package fila;
+
 public class Fila<X> implements Cloneable{
 	protected Object[] vetor;
 	protected float txDC;

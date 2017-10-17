@@ -1,3 +1,5 @@
+package pilha;
+
 public class Pilha<X> implements Cloneable{
 	protected Object[] vetor;
 	protected float txDC;
