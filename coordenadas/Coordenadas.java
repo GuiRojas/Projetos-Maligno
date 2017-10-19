@@ -5,9 +5,6 @@ package coordenadas;
 *
 *	Possui construtor, get das variaveis e os metodos obrigatorios
 *
-*	@param abssissas variavel para definir o ponto no eixo X
-*	@param ordenadas variavel para definir o ponto no eixo Y
-*
 *	@since 2017
 *
 *	@author Francisco 17178 e Guilherme 17182
@@ -21,14 +18,14 @@ public class Coordenadas<X> {
 *
 *	Atribui parametros as variaveis globais
 *
-*	@param x variavel que define a absissa desejada
-*	@param y variavel que define a ordenada desejada
+*	@paramx variavel que define a absissa desejada
+*	@paramy variavel que define a ordenada desejada
 *	
 *	@throw se nao passar os valores x e y	
 	*/
 	public Coordenadas(int x,int y)throws Exception{
 		if ((x == null)||(y == null))
-			throw new Exception('Parametros nao declarados');
+			throw new Exception("Parametros nao declarados");
 
 		this.absissas = x;
 		this.ordenadas = y;
