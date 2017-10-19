@@ -1,5 +1,15 @@
 package pilha;
 
+/**
+*Classe Pilha, que armazena qualquer Classe.
+*
+*@param X Classe a ser armazenada.
+*
+*@since 2017
+*
+*@author Francisco 17178 e Guilherme 17182
+*/
+
 public class Pilha<X> implements Cloneable{
 	protected Object[] vetor;
 	protected float txDC;
@@ -7,45 +17,48 @@ public class Pilha<X> implements Cloneable{
 	protected int topo;
 
 	public Pilha(){
-		this.inic();
+		this.(10);
 	}
 
 	public Pilha(int tam){
-		this.inic(tam);
+		this.(10,50);
 	}
 
-	public Pilha(int tam,float tc){
+	/**
+	*Construtor, declara a Pilha e seu tamanho, alem da taxa de Crescimento.
+	*
+	*@param tam Tamanho da Pilha.
+	*@param tc Taxa de crescimento para quando nao houver espaço na Pilha.
+	*
+	*@throw Exception caso os valores sejam invalidos (0 ou negativo).
+	*/
+
+	public Pilha(int tam,float tc)throws Exception{
 		try{
-			this.inic(tam,tc);
+			if(tam<=0){
+				throw new Exception("Tamanho Inválido");
+			}
+			if(tx<=0){
+				throw new Exception("Taxa Inválida");
+			}
+
+			this.vetor = new Object[tam];
+			this.topo = -1;
+			this.txDC = tx;
 		}catch(Exception erro){}
-	}
-
-	protected void inic(){
-		this.inic(10);
-	}
-
-	protected void inic(int tam){
-		try{
-			this.inic(tam,50);
-		}catch(Exception erro){}
-	}
-
-	protected void inic(int tam, float tx) throws Exception{
-		if(tam<=0){
-			throw new Exception("Tamanho Inválido");
-		}
-		if(tx<=0){
-			throw new Exception("Taxa Inválida");
-		}
-
-		this.vetor = new Object[tam];
-		this.topo = -1;
-		this.txDC = tx;
 	}
 
 	public int getTopo(){
 		return this.topo;
 	}
+
+	/**
+	*Empilha Instancias no vetor da Pilha. Cresce o vetor caso ele esteja cheio.
+	*
+	*@param x Objeto da instancia a ser empilhada.
+	*
+	*@throw Exception caso a instancia seja null.
+	*/
 
 	public void empilhe(X x) throws Exception{
 		if (x==null) {
@@ -60,7 +73,13 @@ public class Pilha<X> implements Cloneable{
 		this.vetor[topo]=x;
 	}
 
-	public void desempilhe(X x) throws Exception{
+	/**
+	*Desempilha a instancia na maior ultima posicao preenchida do vetor.
+	*
+	*@throw Exception caso a Pilha esteja vazia.
+	*/
+
+	public void desempilhe() throws Exception{
 		if(this.vazio())
 			throw new Exception("Não há o que desempilhar!");
 
@@ -80,6 +99,14 @@ public class Pilha<X> implements Cloneable{
 		this.vetor = novo;
 	}
 
+	/**
+	*Retorna o valor da instancia na ultima posicao preenchida do vetor.
+	*
+	*@throw Exception caso a Pilha esteja vazia.
+	*
+	*@return Object Instancia na ultima posicao preenchida do vetor.
+	*/
+
 	public Object getElemento() throws Exception{
 		if(this.vazio())
 			throw new Exception("Pilha está vazia!");
@@ -87,11 +114,21 @@ public class Pilha<X> implements Cloneable{
 		return this.vetor[topo];
 	}
 
+	/**
+	*Verifica se a Pilha está vazia
+	*/
+
 	public boolean vazio(){
 		if(topo==-1)
 			return true;
 		return false;
 	}
+
+	/**
+	*hashCode
+	*
+	*@return int hashCode da Pilha e suas Instancia armazenadas.
+	*/
 
 	public int hashCode(){
 		int ret = 2;
@@ -105,6 +142,12 @@ public class Pilha<X> implements Cloneable{
 		return ret;
 	}
 
+	/**
+	*toString
+	*
+	*@return String Versão em texto de todas as instancias armazenadas.
+	*/
+
 	public String toString(){
 		String ret = "{ ";
 
@@ -113,6 +156,12 @@ public class Pilha<X> implements Cloneable{
 
 		return ret + " }";
 	}
+
+	/**
+	*equals
+	*
+	*@return boolean Verifica se outra classe é identica (Em classe e conteudo) a essa.
+	*/
 
 	public boolean equals(Object obj){
 		if(this==obj)
@@ -136,6 +185,12 @@ public class Pilha<X> implements Cloneable{
 		return true;
 	}
 
+	/**
+	*Construtor de Copia
+	*
+	*@return Pilha outra Pilha <i>identica</i> a essa.
+	*/
+
 	public Pilha (Pilha modelo) throws Exception{
 		if(modelo==null)
 			throw new Exception("Modelu nulo");
@@ -148,6 +203,12 @@ public class Pilha<X> implements Cloneable{
 		this.topo=modelo.topo;
 		this.txDC=modelo.txDC;
 	}
+
+	/**
+	*Clone
+	*
+	*@return Object Chama o construtor de copia e retorna a nova Pilha.
+	*/
 
 	public Object clone(){
 		Pilha ret=null;
