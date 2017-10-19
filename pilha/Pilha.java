@@ -17,11 +17,11 @@ public class Pilha<X> implements Cloneable{
 	protected int topo;
 
 	public Pilha(){
-		this.(10);
+		this(10);
 	}
 
 	public Pilha(int tam){
-		this.(10,50);
+		this(tam,50);
 	}
 
 	/**
