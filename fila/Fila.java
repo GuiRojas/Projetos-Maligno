@@ -1,5 +1,14 @@
 package fila;
 
+/**
+*Fila de instancias da classe X.
+*
+*@param X Tipo de classe a ser armazenada.
+*
+*@since 2017.
+*
+*@author Francisco 17178 e Gulherme 17182.
+*/
 public class Fila<X> implements Cloneable{
 	protected Object[] vetor;
 	protected float txDC;
@@ -9,22 +18,15 @@ public class Fila<X> implements Cloneable{
 				  qtd;
 
 	public Fila(){
-		this.inic();
+		this(10);
 	}
 
-	public Fila(int tam){
-		try{
-			this.inic(tam);
-		}catch(Exception erro){}
-	}
-
-	protected void inic(){
-		try{
-			this.inic(10);
-		}catch(Exception erro){}
-	}
-
-	protected void inic(int tam) throws Exception{
+	/**
+	*Construtor.
+	*
+	*@param tam Tamanho do vetor.
+	*/
+	public Fila(int tam)throws Exception{
 		if(tam<=0)
 			throw new Exception("Tamanho invalido");
 
@@ -34,17 +36,43 @@ public class Fila<X> implements Cloneable{
 		this.qtd = 0;
 	}
 
+	/**
+	*Retorna quantidade de Instancias na Fila.
+	*
+	*@return int Quantidade de Instancias na Fila.
+	*/
+
 	public int getQtd(){
 		return this.qtd;
 	}
+
+	/**
+	*Retorna a ultima posicao preenchida da Fila.
+	*
+	*@return int Retorna a ultima posicao preenchida da Fila.
+	*/
 
 	public int getFim(){
 		return this.fim;
 	}
 
+	/**
+	*Retorna a primeira posicao preenchida da Fila.
+	*
+	*@return int Retorna a primeira posicao preenchida da Fila.
+	*/
+
 	public int getInicio(){
 		return this.inicio;
 	}
+
+	/**
+	*Adiciona uma instancia a fila. Cresce caso esteja cheia.
+	*
+	*@param x Objeto da instancia a adicionar
+	*
+	*@throw Exception Caso tente adicionar algo null 
+	*/
 
 	public void enfileire(X x)throws Exception{
 		if(x==null)
@@ -74,6 +102,12 @@ public class Fila<X> implements Cloneable{
 		this.vetor = novo;
 	}
 
+	/**
+	*Retira o primeiro valor do vetor.
+	*
+	*@throw Exception Caso o vetor esteja vazio.
+	*/
+
 	public void desenfilere()throws Exception{
 		if(this.vazio())
 			throw new Exception("Não há o que ser removido");
@@ -87,6 +121,12 @@ public class Fila<X> implements Cloneable{
 		this.qtd--;
 	}
 
+	/**
+	*Retorna o primeiro valor preenchido do vetor.
+	*
+	*@return Object Retorna a primeira instancia do vetor.
+	*/
+
 	public Object getElemento()throws Exception{
 		if(this.vazio())
 			throw new Exception("Não há elemento");
@@ -94,11 +134,23 @@ public class Fila<X> implements Cloneable{
 		return this.vetor[this.inicio];
 	}
 
+	/**
+	*Verifica se o vetor esta vazio.
+	*
+	*@return boolean Verifica se o vetor esta vazio.
+	*/
+
 	public boolean vazio(){
 		if(this.qtd==0)
 			return true;
 		return false;
 	}
+
+	/**
+	*hashCode
+	*
+	*@return int hashCode
+	*/
 
 	public int hashCode(){
 		int ret = 2;
@@ -115,6 +167,12 @@ public class Fila<X> implements Cloneable{
 		return ret;
 	}
 
+	/**
+	*toString
+	*
+	*@return String toString
+	*/
+
 	public String toString(){
 		String ret = "{ ";
 
@@ -123,6 +181,14 @@ public class Fila<X> implements Cloneable{
 
 		return ret + " }";
 	}
+
+	/**
+	*equals
+	*
+	*@param obj Objeto da instancia a ser comparada
+	*
+	*@return boolean Verifica se o parametro é igual ao this
+	*/
 
 	public boolean equals(Object obj){
 		if(this==obj)
@@ -162,6 +228,12 @@ public class Fila<X> implements Cloneable{
 		this.fim=modelo.fim;
 		this.qtd=modelo.qtd;
 	}
+
+	/**
+	*Clone
+	*
+	*@return Object outra Fila igual a essa. 
+	*/
 
 	public Object clone(){
 		Fila ret=null;
