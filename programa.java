@@ -1,8 +1,10 @@
 import pilha.*;
 import fila.*;
 import coordenadas.*;
+import java.io.*;
+import java.util.Scanner;
 
-public class Programa(){
+public class Programa{
 	public static void main(String[] args){
 		try{
 			BufferedReader teclado = new BufferedReader( new InputStreamReader(System.in));
@@ -28,9 +30,10 @@ public class Programa(){
 
         		while(arquivo.hasNextLine()){
 					str = str + "\n" + arquivo.nextLine();
-				} 
+				}
 
-				labirinto[i][] = str.toCharArray();
+				for(int j=0;j<=co;j++)
+					labirinto[i][j] = str.toCharArray();
         	}
 
         	Pilha<Coordenadas> caminho = new Pilha<Coordenadas>(co*li);
@@ -38,12 +41,12 @@ public class Programa(){
         	Pilha<Fila<Coordenadas>> possibilidades = new Pilha<Fila<Coordenadas>>(co*li);
 
         	for(int i=0;i<=li;i++){
-        		if((i==0)||(i==li){
+        		if((i==0)||(i==li)){
         			for(int j=0;j<=co;j++){
         				if(labirinto[i][j]=='E'){
         					Coordenadas atual = new Coordenadas(i,j);
         					break;
-        				}        				
+        				}
         			}
         		}else{
         			if(labirinto[i][0]){
@@ -54,15 +57,15 @@ public class Programa(){
         				break;
         			}
         		}
-        		throw new Exception("Entrada não encontrada")
-        	}        	
+        		throw new Exception("Entrada não encontrada");
+        	}
 
         	//boolean de modo
         	//true  == prosseguir
         	//false == regredir
         	boolean prog = false;
 
-        	//fila criada antes para fazer a primeira verificação do if de instanciar filas	
+        	//fila criada antes para fazer a primeira verificação do if de instanciar filas
         	Fila<Coordenadas> fila = new Fila<Coordenadas>(3);
 
         	while(labirinto[atual.getX][atual.getY]!='S'){
@@ -71,14 +74,14 @@ public class Programa(){
         		if(labirinto[atual.getX()][atual.getY()]=='S'){
         			//caso atual seja a saída
 
-        			for(int i=-;i<=co;i++){
+        			for(int i=0;i<=co;i++){
         				String show = "";
         				for(int j=0;j<=li;j++)
-        					show+=labirinto[i][j].toString;	
+        					show+=labirinto[i][j].toString;
         				System.out.println(show);
         			}
 
-        			Pilha<Coordenadas> inverso = new Pilha<Coordenadas>;
+        			Pilha<Coordenadas> inverso[] = new Pilha<Coordenadas>[co*li];
 
         			inverso.empilhe(caminho.getElemento());
         			caminho.desempilhe();
@@ -91,7 +94,7 @@ public class Programa(){
 
         			break;
 
-        		}  
+        		}
 
 
         		if(fila.vazio()&&prog)
@@ -160,7 +163,7 @@ public class Programa(){
 
 	        		possibilidades.empilhe(fila);
 
-	        		prog==true;
+	        		prog=true;
         		}else{
 
         			atual = caminho.getElemento();
@@ -173,8 +176,8 @@ public class Programa(){
 
         			possibilidades.desempilhe();
 
-        			prog==false;
-        		}  		
+        			prog=false;
+        		}
 			}
 
 		}catch(Exception err){
