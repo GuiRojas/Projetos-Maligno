@@ -65,40 +65,10 @@ public class Programa{
         	//false == regredir
         	boolean prog = false;
 
-        	//fila criada antes para fazer a primeira verificação do if de instanciar filas
-        	Fila<Coordenadas> fila = new Fila<Coordenadas>(3);
-
         	while(labirinto[atual.getX()][atual.getY()] != 'S'){
         		//roda enquanto não achar a saída
 
-        		if(labirinto[atual.getX()][atual.getY()]=='S'){
-        			//caso atual seja a saída
-
-        			for(int i=0;i<=co;i++){
-        				String show = "";
-        				for(int j=0;j<=li;j++)
-        					show += labirinto[i][j].toString();
-        				System.out.println(show);
-        			}
-
-        			Pilha<Coordenadas>[] inverso = (Pilha<Coordenadas>[])new Object[co*li];
-
-        			inverso.empilhe(caminho.getElemento());
-        			caminho.desempilhe();
-
-        			inverso.toString();
-
-        			while(!(inverso.vazio())){
-        				inverso.desempilhe();
-        			}
-
-        			break;
-
-        		}
-
-
-        		if(fila.vazio()&&prog)
-					Fila<Coordenadas> fila = new Fila<Coordenadas>(3);
+				Fila<Coordenadas> fila = new Fila<Coordenadas>(3);
 
         		/*
 				prog permanece false até achar um espaço vazio,assim virando true
@@ -113,7 +83,7 @@ public class Programa{
 
 	        		}
 	        		if(labirinto[atual.getX()-1][atual.getY()]==' '||
-	        			     labirinto[atual.getX()-1][atual.getY()]=='S'){
+	        		   labirinto[atual.getX()-1][atual.getY()]=='S'){
 
 	        			//achar na esquerda
 	        			fila.enfileire(labirinto[atual.getX()][atual.getY()-1]);
@@ -121,7 +91,7 @@ public class Programa{
 
 	        		}
 	        		if(labirinto[atual.getX()+1][atual.getY()]==' '||
-	        				 labirinto[atual.getX()+1][atual.getY()]=='S'){
+	        		   labirinto[atual.getX()+1][atual.getY()]=='S'){
 
 	        			//achar na direita
 						fila.enfileire(labirinto[atual.getX()][atual.getY()-1]);
@@ -129,7 +99,7 @@ public class Programa{
 
 	        		}
 	        		if(labirinto[atual.getX()][atual.getY()+1]==' '||
-	        				 labirinto[atual.getX()][atual.getY()+1]=='S'){
+	        		   labirinto[atual.getX()][atual.getY()+1]=='S'){
 
 	        			//achar em baixo
 	        			fila.enfileire(labirinto[atual.getX()][atual.getY()-1]);
@@ -179,6 +149,25 @@ public class Programa{
         			prog=false;
         		}
 			}
+
+            for(int i=0;i<=co;i++){
+                String show = "";
+                for(int j=0;j<=li;j++)
+                    show += labirinto[i][j].toString();
+                System.out.println(show);
+            }
+
+            Pilha<Coordenadas> inverso = new Pilha<Coordenadas>(co*li);
+
+            inverso.empilhe(caminho.getElemento());
+            caminho.desempilhe();
+
+            inverso.toString();
+
+            while(!(inverso.vazio())){
+                inverso.desempilhe();
+            }
+
 
 		}catch(Exception err){
 			System.err.println(err);
