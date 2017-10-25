@@ -76,33 +76,33 @@ public class Programa{
 				if (fila.vazio()){
 	        		if(labirinto[atual.getX()][atual.getY()-1]==' '||
 	        		   labirinto[atual.getX()][atual.getY()-1]=='S'){
-
 	        			//achar em cima
-	        			fila.enfileire(labirinto[atual.getX()][atual.getY()-1]);
+
+	        			fila.enfileire(new Coodernadas(atual.getX(),atual.getY()-1));
 	        			prog = true;
 
 	        		}
 	        		if(labirinto[atual.getX()-1][atual.getY()]==' '||
 	        		   labirinto[atual.getX()-1][atual.getY()]=='S'){
-
 	        			//achar na esquerda
-	        			fila.enfileire(labirinto[atual.getX()][atual.getY()-1]);
+
+	        			fila.enfileire(new Coodernadas(atual.getX()-1,atual.getY()));
 	        			prog = true;
 
 	        		}
 	        		if(labirinto[atual.getX()+1][atual.getY()]==' '||
 	        		   labirinto[atual.getX()+1][atual.getY()]=='S'){
-
 	        			//achar na direita
-						fila.enfileire(labirinto[atual.getX()][atual.getY()-1]);
+
+						fila.enfileire(new Coodernadas(atual.getX()+1,atual.getY()));
 						prog = true;
 
 	        		}
 	        		if(labirinto[atual.getX()][atual.getY()+1]==' '||
 	        		   labirinto[atual.getX()][atual.getY()+1]=='S'){
-
 	        			//achar em baixo
-	        			fila.enfileire(labirinto[atual.getX()][atual.getY()-1]);
+
+	        			fila.enfileire(new Coodernadas(atual.getX(),atual.getY()+1));
 	        			prog = true;
 
 	        		}
