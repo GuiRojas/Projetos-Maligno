@@ -3,6 +3,7 @@ import fila.*;
 import coordenadas.*;
 import java.io.*;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Programa{
 	public static void main(String[] args){
@@ -11,29 +12,23 @@ public class Programa{
 
 			System.out.print("Digite o nome do arquivo");
 
-     		String caminhoParaOArquivo=teclado.readLine();
+     		String caminhoParaOArquivo = teclado.readLine();
 
-     		Scanner arquivo=new Scanner(caminhoParaOArquivo);
+			FileReader arquivo = new FileReader(caminhoParaOArquivo);
+			BufferedReader lerArq = new BufferedReader(arquivo);
 
-     		int li,co;
+        	int li = Integer.parseInt(lerArq.readLine());
+        	int co = Integer.parseInt(lerArq.readLine());
 
-        	li=arquivo.readLine();
-        	co=arquivo.readLine();
-
-        	char labirinto = new Character[li][co];
+        	Character[][] labirinto = new Character[li][co];
 
 
         	for(int i=0;i<=li;i++){
-        		String str = "";
-
-        		str = arquivo.nextLine();
-
-        		while(arquivo.hasNextLine()){
-					str = str + "\n" + arquivo.nextLine();
-				}
+        		String str = lerArq.readLine();
+        		char[] vetorChar = str.toCharArray();
 
 				for(int j=0;j<=co;j++)
-					labirinto[i][j] = str.toCharArray();
+					labirinto[i][j] = vetorChar[j];
         	}
 
         	Pilha<Coordenadas> caminho = new Pilha<Coordenadas>(co*li);
@@ -49,7 +44,7 @@ public class Programa{
         				}
         			}
         		}else{
-        			if(labirinto[i][0]){
+        			if(labirinto[i][0]){ ///parei aqui
         				Coordenadas atual = new Coordenadas(i,0);
         				break;
         			}else if(labirinto[i][co]){
