@@ -71,7 +71,7 @@ public class Fila<X> implements Cloneable{
 	*
 	*@param x Objeto da instancia a adicionar
 	*
-	*@throw Exception Caso tente adicionar algo null 
+	*@throw Exception Caso tente adicionar algo null
 	*/
 
 	public void enfileire(X x)throws Exception{
@@ -127,7 +127,7 @@ public class Fila<X> implements Cloneable{
 	*@return Object Retorna a primeira instancia do vetor.
 	*/
 
-	public Object getElemento()throws Exception{
+	public X getElemento()throws Exception{
 		if(this.vazio())
 			throw new Exception("Não há elemento");
 
@@ -232,7 +232,7 @@ public class Fila<X> implements Cloneable{
 	/**
 	*Clone
 	*
-	*@return Object outra Fila igual a essa. 
+	*@return Object outra Fila igual a essa.
 	*/
 
 	public Object clone(){

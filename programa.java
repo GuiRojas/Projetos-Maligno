@@ -35,25 +35,30 @@ public class Programa{
 
         	Pilha<Fila<Coordenadas>> possibilidades = new Pilha<Fila<Coordenadas>>(co*li);
 
+        	int x = 0;
+        	int y = 0;
+
         	for(int i=0;i<=li;i++){
         		if((i==0)||(i==li)){
         			for(int j=0;j<=co;j++){
         				if(labirinto[i][j]=='E'){
-        					Coordenadas atual = new Coordenadas(i,j);
+        					x = i;
+        					y = j;
         					break;
         				}
         			}
         		}else{
-        			if(labirinto[i][0]){ ///parei aqui
-        				Coordenadas atual = new Coordenadas(i,0);
-        				break;
-        			}else if(labirinto[i][co]){
-        				Coordenadas atual = new Coordenadas(i,co);
-        				break;
-        			}
+					for(int j=0;j<=co;j++){
+						if((j==0)||(j==co)){
+        					x = i;
+        					y = j;
+							break;
+						}
+					}
         		}
         		throw new Exception("Entrada não encontrada");
         	}
+        	Coordenadas atual = new Coordenadas(x,y);
 
         	//boolean de modo
         	//true  == prosseguir
@@ -63,7 +68,7 @@ public class Programa{
         	//fila criada antes para fazer a primeira verificação do if de instanciar filas
         	Fila<Coordenadas> fila = new Fila<Coordenadas>(3);
 
-        	while(labirinto[atual.getX][atual.getY]!='S'){
+        	while(labirinto[atual.getX()][atual.getY()] != 'S'){
         		//roda enquanto não achar a saída
 
         		if(labirinto[atual.getX()][atual.getY()]=='S'){
@@ -72,11 +77,11 @@ public class Programa{
         			for(int i=0;i<=co;i++){
         				String show = "";
         				for(int j=0;j<=li;j++)
-        					show+=labirinto[i][j].toString;
+        					show += labirinto[i][j].toString();
         				System.out.println(show);
         			}
 
-        			Pilha<Coordenadas> inverso[] = new Pilha<Coordenadas>[co*li];
+        			Pilha<Coordenadas>[] inverso = (Pilha<Coordenadas>[])new Object[co*li];
 
         			inverso.empilhe(caminho.getElemento());
         			caminho.desempilhe();
@@ -176,6 +181,7 @@ public class Programa{
 			}
 
 		}catch(Exception err){
+			System.err.println(err);
 
 		}
 	}

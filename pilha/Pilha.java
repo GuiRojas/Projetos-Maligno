@@ -13,7 +13,7 @@ package pilha;
 public class Pilha<X> implements Cloneable{
 	protected Object[] vetor;
 	protected float txDC;
-	
+
 	protected int topo;
 
 	public Pilha(){
@@ -107,7 +107,7 @@ public class Pilha<X> implements Cloneable{
 	*@return Object Instancia na ultima posicao preenchida do vetor.
 	*/
 
-	public Object getElemento() throws Exception{
+	public X getElemento() throws Exception{
 		if(this.vazio())
 			throw new Exception("Pilha está vazia!");
 
