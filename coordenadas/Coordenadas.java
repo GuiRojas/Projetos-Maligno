@@ -20,20 +20,17 @@ public class Coordenadas<X> {
 *
 *	@paramx variavel que define a absissa desejada
 *	@paramy variavel que define a ordenada desejada
-*	
-*	@throw se nao passar os valores x e y	
+*
+*	@throw se nao passar os valores x e y
 	*/
-	public Coordenadas(int x,int y)throws Exception{
-		if ((x == null)||(y == null))
-			throw new Exception("Parametros nao declarados");
-
+	public Coordenadas(int x,int y){
 		this.absissas = x;
 		this.ordenadas = y;
 	}
 
 	/**
 *	Retorna o valor da absissa da coordenada
-*	
+*
 *	@return retorna o valor da absissa da coodernada guardada
 	*/
 	public int getX(){
@@ -42,7 +39,7 @@ public class Coordenadas<X> {
 
 	/**
 *	Retorna o valor da ordenada da coordenada
-*	
+*
 *	@return retorna o valor da ordenada da coodernada guardada
 	*/
 	public int getY(){

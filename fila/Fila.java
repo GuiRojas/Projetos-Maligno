@@ -17,7 +17,7 @@ public class Fila<X> implements Cloneable{
 				  fim,
 				  qtd;
 
-	public Fila(){
+	public Fila()throws Exception{
 		this(10);
 	}
 
@@ -32,6 +32,7 @@ public class Fila<X> implements Cloneable{
 
 		this.vetor = new Object[tam];
 		this.inicio = 0;
+		this.txDC = 50;
 		this.fim = -1;
 		this.qtd = 0;
 	}
@@ -131,7 +132,7 @@ public class Fila<X> implements Cloneable{
 		if(this.vazio())
 			throw new Exception("Não há elemento");
 
-		return this.vetor[this.inicio];
+		return (X)this.vetor[this.inicio];
 	}
 
 	/**

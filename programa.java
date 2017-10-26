@@ -23,11 +23,11 @@ public class Programa{
         	Character[][] labirinto = new Character[li][co];
 
 
-        	for(int i=0;i<=li;i++){
+        	for(int i=0;i<li;i++){
         		String str = lerArq.readLine();
         		char[] vetorChar = str.toCharArray();
 
-				for(int j=0;j<=co;j++)
+				for(int j=0;j<vetorChar.length;j++)
 					labirinto[i][j] = vetorChar[j];
         	}
 
@@ -38,9 +38,9 @@ public class Programa{
         	int x = 0;
         	int y = 0;
 
-        	for(int i=0;i<=li;i++){
+        	for(int i=0;i<li;i++){
         		if((i==0)||(i==li)){
-        			for(int j=0;j<=co;j++){
+        			for(int j=0;j<co;j++){
         				if(labirinto[i][j]=='E'){
         					x = i;
         					y = j;
@@ -48,7 +48,7 @@ public class Programa{
         				}
         			}
         		}else{
-					for(int j=0;j<=co;j++){
+					for(int j=0;j<co;j++){
 						if((j==0)||(j==co)){
         					x = i;
         					y = j;
@@ -78,7 +78,7 @@ public class Programa{
 	        		   labirinto[atual.getX()][atual.getY()-1]=='S'){
 	        			//achar em cima
 
-	        			fila.enfileire(new Coodernadas(atual.getX(),atual.getY()-1));
+	        			fila.enfileire(new Coordenadas(atual.getX(),atual.getY()-1));
 	        			prog = true;
 
 	        		}
@@ -86,7 +86,7 @@ public class Programa{
 	        		   labirinto[atual.getX()-1][atual.getY()]=='S'){
 	        			//achar na esquerda
 
-	        			fila.enfileire(new Coodernadas(atual.getX()-1,atual.getY()));
+	        			fila.enfileire(new Coordenadas(atual.getX()-1,atual.getY()));
 	        			prog = true;
 
 	        		}
@@ -94,7 +94,7 @@ public class Programa{
 	        		   labirinto[atual.getX()+1][atual.getY()]=='S'){
 	        			//achar na direita
 
-						fila.enfileire(new Coodernadas(atual.getX()+1,atual.getY()));
+						fila.enfileire(new Coordenadas(atual.getX()+1,atual.getY()));
 						prog = true;
 
 	        		}
@@ -102,7 +102,7 @@ public class Programa{
 	        		   labirinto[atual.getX()][atual.getY()+1]=='S'){
 	        			//achar em baixo
 
-	        			fila.enfileire(new Coodernadas(atual.getX(),atual.getY()+1));
+	        			fila.enfileire(new Coordenadas(atual.getX(),atual.getY()+1));
 	        			prog = true;
 
 	        		}
@@ -124,10 +124,10 @@ public class Programa{
 
         			//não precisar verificar se é null,
 	        		//pois se chegou aqui É porque tem algo
-	    			atual = fila.getElemento();
+	    			atual = (Coordenadas)fila.getElemento();
 	    			fila.desenfilere();
 
-	        		labirinto[atual.getX()][atual.getY()]="*";
+	        		labirinto[atual.getX()][atual.getY()]='*';
 
 	        		caminho.empilhe(atual);
 
@@ -140,9 +140,9 @@ public class Programa{
 
         			caminho.desempilhe();
 
-        			labirinto[getX()][getY()]=' ';
+        			labirinto[atual.getX()][atual.getY()] = ' ';
 
-        			fila = possibilidades.getElemento();
+        			fila = (Fila<Coordenadas>)possibilidades.getElemento();
 
         			possibilidades.desempilhe();
 
@@ -150,9 +150,9 @@ public class Programa{
         		}
 			}
 
-            for(int i=0;i<=co;i++){
+            for(int i=0;i<co;i++){
                 String show = "";
-                for(int j=0;j<=li;j++)
+                for(int j=0;j<li;j++)
                     show += labirinto[i][j].toString();
                 System.out.println(show);
             }
