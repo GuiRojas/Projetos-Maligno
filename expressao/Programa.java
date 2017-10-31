@@ -27,7 +27,7 @@ public class Programa{
 				String str = quebrado.nextToken();
 
 				try{
-					double num = parseDouble(str);
+					double num = Double.parseDouble(str);
 					//vê se o token é um número
 					//Se não for um número, e sim um operador,
 					//da erro e vai pro catch
@@ -162,6 +162,90 @@ public class Programa{
 			///////////////////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////////////////////////
 			
+			double op1 = 0;
+			double op2 = 0;
+			String opr = "";
+
+			while(!(fila.vazio())){
+
+				//lê o valor (numerico ou não) e associa no opr
+				opr = fila.getElemento();
+				fila.desenfilheire();
+
+				try{
+					//novamente, verifica se o valor lido é número
+					op1 = Double.parseDouble(opr);
+					pilha.empilhe(opr);
+				}catch{
+					//caso seja um operador
+					op1 = Double.parseDouble(pilha.getElemento());
+					pilha.desempilhe();
+					op2 = Double.parseDouble(pilha.getElemento());
+					pilha.desempilhe();
+
+					switch(opr){ // +-*/^
+						case "+":
+							opr = String.valueOf(op1 + op2);
+							break;
+						case "-":
+							opr = String.valueOf(op1 - op2);
+							break;
+						case "*":
+							opr = String.valueOf(op1 * op2);
+							break;
+						case "/":
+							opr = String.valueOf(op1 / op2);
+							break;
+						case "^":
+							opr = String.valueOf(Math.pow(op1,op2));
+							break;						
+					}//switch da operação
+
+					pilha.empilhe(opr);
+
+				}//catch
+
+				//teste////////////////////////////////////////////
+				System.out.println("Teste begin");
+				System.out.println(quebrado.toString());
+				System.out.println("op1"+String.valueOf(op1));
+				System.out.println("op2"+String.valueOf(op1));
+				System.out.println("opr"+opr);
+				System.out.println("fila:"+fila.toString());
+				System.out.println("pilha:"+pilha.toString());
+				if(pilha.vazio()){
+					System.out.println("Pilha está vazia");				
+				}
+				if(fila.vazio()){
+					System.out.println("fila está vazia");				
+				}
+				System.out.println("Teste end");
+				///////////////////////////////////////////////////
+
+			}//while da segunda etapa
+
+			//teste////////////////////////////////////////////
+			System.out.println("Teste begin");
+			System.out.println(quebrado.toString());
+			System.out.println("op1 "+String.valueOf(op1));
+			System.out.println("op2 "+String.valueOf(op1));
+			System.out.println("opr "+opr);
+			System.out.println("fila: "+fila.toString());
+			System.out.println("pilha: "+pilha.toString());
+			if(pilha.vazio()){
+				System.out.println("Pilha está vazia");				
+			}
+			if(fila.vazio()){
+				System.out.println("fila está vazia");				
+			}
+			System.out.println("Teste end");
+			///////////////////////////////////////////////////
+
+			/////////////////////////////////////////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			System.out.println("Resultado: "+pilha.getElemento());
 
 		}catch(Exception err){}
 	}
