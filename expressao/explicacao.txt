@@ -1,0 +1,47 @@
+ex:
+10+2*3^4/((5-6)*2)^3
+
+StringTokenixer quebrado = new StringTokenizer (exp , "+-*/^()" , true);
+                                                         /\
+quebrado.hasMoreTokes()                                  ||
+quebrado.nextToken()     -> devolve tudo até o proximo delimitador
+
+token = pedaço
+
+java.util
+
+
+char op = "+";
+String ops = "+-*/^()";
+if(ops.contains(op));	
+
+2 etapas:
+
+1° :
+string inteiro processado
+fila  -> lotada em ordem esquisita
+pilha -> vazia
+**não terá parenteses**
+
+---
+numero   -> fila
+operador -> pilha
+---
+
+ficará  10 2.5 3 4 ^ * 5 6 - 2 * 3 ^ / +
+~~~~~~~~notação polonesa
+
+2°:
+realiza, então, o calculo
+
+fila  -> vazia
+pilha -> um único elemento (resultado)
+
+
+double op 1
+char oper
+double op 2
+
+empilha os numeros na pilha. ao achar um operador, a associa no char oper.
+dps, desempilha 2 doubles da pilha e faz a conta, depois empilha o resultado.
+repete o processo até sobrar apenas 1 numero na pilha.
