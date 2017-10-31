@@ -10,7 +10,7 @@ public class Programa{
 		try{
 			BufferedReader teclado = new BufferedReader( new InputStreamReader(System.in));
 
-			System.out.print("Digite o nome do arquivo");
+			System.out.print("Digite o nome do arquivo:");
 
      		String caminhoParaOArquivo = teclado.readLine();
 
@@ -31,6 +31,8 @@ public class Programa{
 					labirinto[i][j] = vetorChar[j];
         	}
 
+        	lerArq.close();
+
         	Pilha<Coordenadas> caminho = new Pilha<Coordenadas>(co*li);
 
         	Pilha<Fila<Coordenadas>> possibilidades = new Pilha<Fila<Coordenadas>>(co*li);
@@ -44,19 +46,18 @@ public class Programa{
         				if(labirinto[i][j]=='E'){
         					x = i;
         					y = j;
-        					break;
         				}
         			}
         		}else{
 					for(int j=0;j<co;j++){
 						if((j==0)||(j==co)){
-        					x = i;
-        					y = j;
-							break;
+        					if(labirinto[i][j]=='E'){
+								x = i;
+								y = j;
+        					}
 						}
 					}
         		}
-        		throw new Exception("Entrada não encontrada");
         	}
         	Coordenadas atual = new Coordenadas(x,y);
 
@@ -64,55 +65,79 @@ public class Programa{
         	//true  == prosseguir
         	//false == regredir
         	boolean prog = false;
+        	boolean terminou = false;
 
-        	while(labirinto[atual.getX()][atual.getY()] != 'S'){
+        	while(!(terminou)){
         		//roda enquanto não achar a saída
 
-				Fila<Coordenadas> fila = new Fila<Coordenadas>(3);
+				if (atual.getY()+1 != co)
+					if (labirinto[atual.getX()][atual.getY()+1]=='S')
+						terminou = true;
 
-        		/*
-				prog permanece false até achar um espaço vazio,assim virando true
-        		*/
-				if (fila.vazio()){
-	        		if(labirinto[atual.getX()][atual.getY()-1]==' '||
-	        		   labirinto[atual.getX()][atual.getY()-1]=='S'){
+				if (atual.getY()-1 != -1)
+					if (labirinto[atual.getX()][atual.getY()-1]=='S')
+						terminou = true;
+
+				if (atual.getX()+1 != li)
+					if (labirinto[atual.getX()+1][atual.getY()]=='S')
+						terminou = true;
+
+				if (atual.getX()-1 != -1)
+					if (labirinto[atual.getX()-1][atual.getY()]=='S')
+						terminou = true;
+
+        		if (terminou) {
+					for(int i=0;i<li;i++){
+	           			String show = "";
+	           		    for(int j=0;j<co;j++)
+	           	        	show += labirinto[i][j].toString();
+	           	    System.out.println(show);
+            		}
+
+					System.out.println(caminho.toString());
+				}
+
+
+
+
+				Fila<Coordenadas> fila = new Fila<Coordenadas>(3);
+				//prog permanece false até achar um espaço vazio,assim virando true
+
+				if (atual.getY()-1 != -1)
+	        		if(labirinto[atual.getX()][atual.getY()-1]== ' '){
 	        			//achar em cima
 
 	        			fila.enfileire(new Coordenadas(atual.getX(),atual.getY()-1));
 	        			prog = true;
-
 	        		}
-	        		if(labirinto[atual.getX()-1][atual.getY()]==' '||
-	        		   labirinto[atual.getX()-1][atual.getY()]=='S'){
+
+	        	if (atual.getX()-1 != -1)
+	        		if(labirinto[atual.getX()-1][atual.getY()]== ' '){
 	        			//achar na esquerda
 
 	        			fila.enfileire(new Coordenadas(atual.getX()-1,atual.getY()));
 	        			prog = true;
-
 	        		}
-	        		if(labirinto[atual.getX()+1][atual.getY()]==' '||
-	        		   labirinto[atual.getX()+1][atual.getY()]=='S'){
+	        	if (atual.getX()+1 != li)
+	        		if(labirinto[atual.getX()+1][atual.getY()]== ' '){
 	        			//achar na direita
 
 						fila.enfileire(new Coordenadas(atual.getX()+1,atual.getY()));
 						prog = true;
-
 	        		}
-	        		if(labirinto[atual.getX()][atual.getY()+1]==' '||
-	        		   labirinto[atual.getX()][atual.getY()+1]=='S'){
+	        	if (atual.getY()+1 != co)
+	        		if(labirinto[atual.getX()][atual.getY()+1]== ' '){
 	        			//achar em baixo
 
 	        			fila.enfileire(new Coordenadas(atual.getX(),atual.getY()+1));
 	        			prog = true;
-
 	        		}
-        		}
 
-    			if( !prog && fila.vazio()){
+    			if( !prog && possibilidades.vazio()){
     				//caso alguem adjacente seja a entrada,
     				//não há solução
 
-    				throw new Exception("Não há como completar o labirinto!");
+    				throw new Exception("Nao ha como completar o labirinto!");
 
     			}
         		//prosseguir caso encontre algo
@@ -124,8 +149,11 @@ public class Programa{
 
         			//não precisar verificar se é null,
 	        		//pois se chegou aqui É porque tem algo
-	    			atual = (Coordenadas)fila.getElemento();
-	    			fila.desenfilere();
+
+	        		if (!(fila.vazio())){
+	    				atual = (Coordenadas)fila.getElemento();
+	    				fila.desenfilere();
+					}
 
 	        		labirinto[atual.getX()][atual.getY()]='*';
 
@@ -133,42 +161,22 @@ public class Programa{
 
 	        		possibilidades.empilhe(fila);
 
-	        		prog=true;
+	        		prog = false;
         		}else{
+					if (!(possibilidades.vazio())) {
+        				fila = (Fila<Coordenadas>)possibilidades.getElemento();
+        				possibilidades.desempilhe();
 
-        			atual = caminho.getElemento();
-
-        			caminho.desempilhe();
-
-        			labirinto[atual.getX()][atual.getY()] = ' ';
-
-        			fila = (Fila<Coordenadas>)possibilidades.getElemento();
-
-        			possibilidades.desempilhe();
-
-        			prog=false;
+        				if (!(fila.vazio())) {
+							atual = (Coordenadas)fila.getElemento();
+	    					fila.desenfilere();
+	    					prog = true;
+						}else {
+							labirinto[atual.getX()][atual.getY()] = ' ';
+						}
+        			}
         		}
 			}
-
-            for(int i=0;i<co;i++){
-                String show = "";
-                for(int j=0;j<li;j++)
-                    show += labirinto[i][j].toString();
-                System.out.println(show);
-            }
-
-            Pilha<Coordenadas> inverso = new Pilha<Coordenadas>(co*li);
-
-            inverso.empilhe(caminho.getElemento());
-            caminho.desempilhe();
-
-            inverso.toString();
-
-            while(!(inverso.vazio())){
-                inverso.desempilhe();
-            }
-
-
 		}catch(Exception err){
 			System.err.println(err);
 
