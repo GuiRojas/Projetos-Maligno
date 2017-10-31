@@ -17,7 +17,7 @@ public class Fila<X> implements Cloneable{
 				  fim,
 				  qtd;
 
-	public Fila(){
+	public Fila()throws Exception{
 		this(10);
 	}
 
@@ -32,6 +32,7 @@ public class Fila<X> implements Cloneable{
 
 		this.vetor = new Object[tam];
 		this.inicio = 0;
+		this.txDC = 50;
 		this.fim = -1;
 		this.qtd = 0;
 	}
@@ -71,7 +72,7 @@ public class Fila<X> implements Cloneable{
 	*
 	*@param x Objeto da instancia a adicionar
 	*
-	*@throw Exception Caso tente adicionar algo null 
+	*@throw Exception Caso tente adicionar algo null
 	*/
 
 	public void enfileire(X x)throws Exception{
@@ -127,11 +128,11 @@ public class Fila<X> implements Cloneable{
 	*@return Object Retorna a primeira instancia do vetor.
 	*/
 
-	public Object getElemento()throws Exception{
+	public X getElemento()throws Exception{
 		if(this.vazio())
 			throw new Exception("Não há elemento");
 
-		return this.vetor[this.inicio];
+		return (X)this.vetor[this.inicio];
 	}
 
 	/**
@@ -176,7 +177,7 @@ public class Fila<X> implements Cloneable{
 	public String toString(){
 		String ret = "{ ";
 
-		for(int i=0;i<=this.vetor.length;i++)
+		for(int i=inicio;i<=this.fim;i++)
 			ret+=this.vetor[i].toString()+(i!=this.vetor.length ?",":"");
 
 		return ret + " }";
@@ -232,7 +233,7 @@ public class Fila<X> implements Cloneable{
 	/**
 	*Clone
 	*
-	*@return Object outra Fila igual a essa. 
+	*@return Object outra Fila igual a essa.
 	*/
 
 	public Object clone(){

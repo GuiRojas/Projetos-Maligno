@@ -13,14 +13,14 @@ package pilha;
 public class Pilha<X> implements Cloneable{
 	protected Object[] vetor;
 	protected float txDC;
-	
+
 	protected int topo;
 
-	public Pilha(){
+	public Pilha() throws Exception{
 		this(10);
 	}
 
-	public Pilha(int tam){
+	public Pilha(int tam) throws Exception{
 		this(tam,50);
 	}
 
@@ -38,13 +38,13 @@ public class Pilha<X> implements Cloneable{
 			if(tam<=0){
 				throw new Exception("Tamanho Inválido");
 			}
-			if(tx<=0){
+			if(tc<=0){
 				throw new Exception("Taxa Inválida");
 			}
 
 			this.vetor = new Object[tam];
 			this.topo = -1;
-			this.txDC = tx;
+			this.txDC = tc;
 		}catch(Exception erro){}
 	}
 
@@ -107,11 +107,11 @@ public class Pilha<X> implements Cloneable{
 	*@return Object Instancia na ultima posicao preenchida do vetor.
 	*/
 
-	public Object getElemento() throws Exception{
+	public X getElemento() throws Exception{
 		if(this.vazio())
 			throw new Exception("Pilha está vazia!");
 
-		return this.vetor[topo];
+		return (X)this.vetor[topo];
 	}
 
 	/**
