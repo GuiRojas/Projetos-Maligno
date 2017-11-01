@@ -177,8 +177,11 @@ public class Fila<X> implements Cloneable{
 	public String toString(){
 		String ret = "{ ";
 
-		for(int i=inicio;i<=this.fim;i++)
-			ret+=this.vetor[i].toString()+(i!=this.vetor.length ?",":"");
+		for(int i=0;i<=this.vetor.length;i++){
+			if(((this.fim>=this.inicio)&& (i<=this.fim)&&(i>=this.inicio))||
+			   ((this.fim<=this.inicio)&&((i>=this.fim)||(i<=this.inicio))))
+				ret+=this.vetor[i].toString();
+		}
 
 		return ret + " }";
 	}

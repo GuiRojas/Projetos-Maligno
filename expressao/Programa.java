@@ -1,5 +1,6 @@
 import fila.*;
 import pilha.*;
+import matriz.*;
 import java.io.*;
 import java.util.*;
 
@@ -13,8 +14,10 @@ public class Programa{
 	    }
 	    return false;
 	}
+
 	public static void main(String[] args){
 		try{
+
 			BufferedReader teclado = new BufferedReader( new InputStreamReader(System.in));
 
 			System.out.print("Digite a expressão a ser resolvida.");
@@ -32,12 +35,16 @@ public class Programa{
 			Fila<String> fila = new Fila<String>(exp.length());
 			Pilha<String> pilha = new Pilha<String>(exp.length());
 
+			Matriz mat = new Matriz();
+
 			String ops = "+-*/^()";
 
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////////////////////////
 			///////////////////////////////////////////////////////////////////////////////////////////////////
+			//string que auxilia na verificação da matriz
+			String aux = "";
 			while(quebrado.hasMoreTokens()){
 				//primeira etapa
 				String str = quebrado.nextToken();
@@ -63,89 +70,40 @@ public class Programa{
 					while(bol){
 
 						//teste
-						System.out.println("Entrou no while dentro do catch");
+						System.out.println("Entrou no while dentro do else");
 
-						//verifica cada possibilidade e trata baseado na matrix fornecida
-						switch(str){
-							case "(": //f f f f f f f
-								pilha.empilhe(str);
-								bol = false;
-								break;
-							case "^": //f f f f f f f
-								pilha.empilhe(str);
-								bol = false;
-								break;
-							case "*": //f t t t f f f
-								if( pilha.getElemento()=="^"|| //t
-									pilha.getElemento()=="*"||
-									pilha.getElemento()=="/"){
 
-									fila.enfileire(pilha.getElemento());
-									pilha.desempilhe();
+						if(str!=")"){
 
-								}else{
-									pilha.empilhe(str);
-									bol=false;
-								}
-								break;
-							case "/": //f t t t f f f
-								if( pilha.getElemento()=="^"|| //t
-									pilha.getElemento()=="*"||
-									pilha.getElemento()=="/"){
+							///////////////////////////
+							if(!(pilha.vazio())){
+								aux = pilha.getElemento();
+							}else{
+								aux = " ";
+							}
 
-									fila.enfileire(pilha.getElemento());
-									pilha.desempilhe();
-
-								}else{
-									pilha.empilhe(str);
-									bol=false;
-								}
-								break;
-							case "+": //f t t t t t f
-								//teste
-								System.out.println("Está no +");
-
-								if( pilha.vazio()||
-								    pilha.getElemento()=="("|| //f
-									pilha.getElemento()==")"){
-
-									pilha.empilhe(str);
-									bol=false;
+							if(mat.verificar(str,aux)){
+								if(pilha.vazio()){
+									fila.enfileire(str);
 								}else{
 									fila.enfileire(pilha.getElemento());
 									pilha.desempilhe();
 								}
-								break;
-							case "-": //f t t t t t f
-								if( pilha.vazio()||
-								    pilha.getElemento()=="("|| //f
-									pilha.getElemento()==")"){
+							}else{
+								fila.enfileire(str);
+							}
+							//fim da matriz////////////
 
-									pilha.empilhe(str);
-									bol=false;
+						}else{
+							while(str==")"){
+								if(pilha.getElemento()=="("){
+									pilha.desempilhe();
 								}else{
 									fila.enfileire(pilha.getElemento());
 									pilha.desempilhe();
 								}
-								break;
-							case ")": //t f f f f f f
-								if( pilha.getElemento()=="("){ //desempilha até achar um (
-									pilha.desempilhe();
-									bol=false;
-								}else{
-									if(pilha.vazio()){
-										throw new Exception("Correspondência de parenteses incorrta!");
-									}else{
-										fila.enfileire(pilha.getElemento());
-										pilha.desempilhe();
-									}
-								}
-								break;
-							default:
-								System.out.println("Defaultou");
-								break;
-
-						}//switch
+							}
+						} //else do  )
 
 					}//while dos operadores
 
