@@ -109,7 +109,7 @@ public class Fila<X> implements Cloneable{
 	*@throw Exception Caso o vetor esteja vazio.
 	*/
 
-	public void desenfilere()throws Exception{
+	public void desenfileire()throws Exception{
 		if(this.vazio())
 			throw new Exception("Não há o que ser removido");
 
@@ -177,10 +177,29 @@ public class Fila<X> implements Cloneable{
 	public String toString(){
 		String ret = "{ ";
 
-		for(int i=0;i<=this.vetor.length;i++){
-			if(((this.fim>=this.inicio)&& (i<=this.fim)&&(i>=this.inicio))||
-			   ((this.fim<=this.inicio)&&((i>=this.fim)||(i<=this.inicio))))
-				ret+=this.vetor[i].toString();
+		//---######---
+		if(this.fim>this.inicio){
+			for(int i=this.inicio;i<=this.fim;i++){
+				if(this.vetor[i]!=null){
+					ret+=this.vetor[i].toString();
+				}
+			}
+		}else
+		//###------###
+		if(this.inicio>this.fim){
+			for(int i=this.inicio;i<=this.vetor.length;i++){
+				if(this.vetor[i]!=null){
+					ret+=this.vetor[i].toString();
+				}
+			}
+			for(int i=0;i<=this.fim;i++){
+				if(this.vetor[i]!=null){
+					ret+=this.vetor[i].toString();
+				}
+			}
+		}else{
+			//caso fim==inicio
+			ret = ret + "empty";
 		}
 
 		return ret + " }";
