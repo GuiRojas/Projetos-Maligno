@@ -114,7 +114,7 @@ public class Matriz{
 	}
 
 	public String toString(){
-		int ret="{";
+		String ret="{";
 
 		for(int i=0;i<7;i++){
 			ret = ret + "{";
@@ -152,5 +152,29 @@ public class Matriz{
 		return true;
 	}
 
-	//PRECISA D CL E CC SR.RORRINHAZ
+	public Matriz (Matriz modelo) throws Exception{
+		if(modelo==null)
+			throw new Exception("Modelu nulo");
+
+		this.matriz = modelo.matriz;
+		this.oprRef = modelo.oprRef;
+		this.oprAtv = modelo.oprAtv;
+	}
+
+	/**
+	*Clone
+	*
+	*@return Object outra Matriz igual a essa.
+	*/
+
+	public Object clone(){
+		Matriz ret=null;
+
+		try{
+			ret= new Matriz(this);
+		}catch(Exception erro){}
+
+		return ret;
+	}
+
 }
