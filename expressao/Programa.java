@@ -20,7 +20,7 @@ public class Programa{
 
 			BufferedReader teclado = new BufferedReader( new InputStreamReader(System.in));
 
-			System.out.print("Digite a expressão a ser resolvida.");
+			System.out.print("Digite a expressao a ser resolvida.");
 
      		String exp =teclado.readLine();
 
@@ -53,7 +53,7 @@ public class Programa{
 					//Caso o token não seja um número
 					if(!(ops.contains(str))){
 						//caso não seja um operador válido
-						throw new Exception("Operador inválido: "+str);
+						throw new Exception("Operador invalido");
 					}
 
 					boolean bol = true;
@@ -64,14 +64,17 @@ public class Programa{
 						if(str.contains(")")){
 
 							while(str.contains(")")){
-								if(pilha.getElemento().contains("(")){
-									pilha.desempilhe();
-									str=" ";
-									bol = false;
-								}else{
-									fila.enfileire(pilha.getElemento());
-									pilha.desempilhe();
-								}
+								if (!(pilha.vazio())) {
+									if(pilha.getElemento().contains("(")){
+										pilha.desempilhe();
+										str=" ";
+										bol = false;
+									}else{
+										fila.enfileire(pilha.getElemento());
+										pilha.desempilhe();
+									}
+								}else
+									throw new Exception("E necessario abrir e fechar todos os parenteses!");
 							}
 						}else{
 							///////////////////////////////////////////
@@ -105,8 +108,11 @@ public class Programa{
 
 			//passar TUDO da pilha para a fila.
 			while(!(pilha.vazio())){
-				fila.enfileire(pilha.getElemento());
-				pilha.desempilhe();
+				if (!(pilha.getElemento().contains("("))) {
+					fila.enfileire(pilha.getElemento());
+					pilha.desempilhe();
+				}else
+					throw new Exception("E necessario abrir e fechar todos os parenteses!");
 			}
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////

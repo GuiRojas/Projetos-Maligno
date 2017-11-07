@@ -154,7 +154,7 @@ public class Matriz{
 
 	public Matriz (Matriz modelo) throws Exception{
 		if(modelo==null)
-			throw new Exception("Modelu nulo");
+			throw new Exception("Modelo nulo");
 
 		this.matriz = modelo.matriz;
 		this.oprRef = modelo.oprRef;

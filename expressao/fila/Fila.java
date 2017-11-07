@@ -77,7 +77,7 @@ public class Fila<X> implements Cloneable{
 
 	public void enfileire(X x)throws Exception{
 		if(x==null)
-			throw new Exception("Inserção de valor nulo");
+			throw new Exception("Insercao de valor nulo");
 
 		if(this.fim+1==this.vetor.length)
 			if(this.qtd==this.vetor.length)
@@ -111,7 +111,7 @@ public class Fila<X> implements Cloneable{
 
 	public void desenfileire()throws Exception{
 		if(this.vazio())
-			throw new Exception("Não há o que ser removido");
+			throw new Exception("Nao ha o que ser removido");
 
 		this.vetor[this.inicio]=null;
 		if(this.inicio+1==this.vetor.length)
@@ -130,7 +130,7 @@ public class Fila<X> implements Cloneable{
 
 	public X getElemento()throws Exception{
 		if(this.vazio())
-			throw new Exception("Não há elemento");
+			throw new Exception("Nao ha elemento");
 
 		return (X)this.vetor[this.inicio];
 	}
@@ -239,7 +239,7 @@ public class Fila<X> implements Cloneable{
 
 	public Fila (Fila modelo) throws Exception{
 		if(modelo==null)
-			throw new Exception("Modelu nulo");
+			throw new Exception("Modelo nulo");
 
 		this.vetor = new Object[modelo.vetor.length];
 		for(int i=0;i<=this.vetor.length;i++){

@@ -36,10 +36,10 @@ public class Pilha<X> implements Cloneable{
 	public Pilha(int tam,float tc)throws Exception{
 		try{
 			if(tam<=0){
-				throw new Exception("Tamanho Inválido");
+				throw new Exception("Tamanho Invalido");
 			}
 			if(tc<=0){
-				throw new Exception("Taxa Inválida");
+				throw new Exception("Taxa Invalida");
 			}
 
 			this.vetor = new Object[tam];
@@ -62,7 +62,7 @@ public class Pilha<X> implements Cloneable{
 
 	public void empilhe(X x) throws Exception{
 		if (x==null) {
-			throw new Exception("Valor nulo não pode ser adicionado");
+			throw new Exception("Valor nulo nao pode ser adicionado");
 		}
 
 		if(this.topo+1==this.vetor.length)
@@ -81,7 +81,7 @@ public class Pilha<X> implements Cloneable{
 
 	public void desempilhe() throws Exception{
 		if(this.vazio())
-			throw new Exception("Não há o que desempilhar!");
+			throw new Exception("Nao ha o que desempilhar!");
 
 		this.vetor[topo]=null;
 		topo--;
@@ -109,7 +109,7 @@ public class Pilha<X> implements Cloneable{
 
 	public X getElemento() throws Exception{
 		if(this.vazio())
-			throw new Exception("Pilha está vazia!");
+			throw new Exception("Pilha esta vazia!");
 
 		return (X)this.vetor[topo];
 	}
@@ -193,7 +193,7 @@ public class Pilha<X> implements Cloneable{
 
 	public Pilha (Pilha modelo) throws Exception{
 		if(modelo==null)
-			throw new Exception("Modelu nulo");
+			throw new Exception("Modelo nulo");
 
 		this.vetor = new Object[modelo.vetor.length];
 		for(int i=0;i<=this.vetor.length;i++){
