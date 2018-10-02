@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-//1 => arquivo não encontrado
+//1 => arquivo nÃ£o encontrado
 int main(){
+    //ytyttgtyytuhuhyjytrftr676 6765trtfgtfuyhjyhtrgfd
     FILE *arq;
     char dir[1000];
     char linha[100000];
@@ -13,15 +14,15 @@ int main(){
     scanf("%s",dir);
 
     if((arq = fopen(dir,"r")) == NULL){
-        printf("Erro! Arquivo não existe!");
+        printf("Erro! Arquivo nÃ£o existe!");
         exit(1);
     }
-    //lê a quantidade de expressões do sistema
+    //lÃª a quantidade de expressÃµes do sistema
     fscanf(arq,"%[^\n]",linha);
     printf("Acheeeiiiii %s",linha);
     qtd = atoi(linha);
 
-    //lê o sistema char por char
+    //lÃª o sistema char por char
     while((ch = fgetc(arq)) != EOF){
         int len = strlen(linha);
         linha[len] = ch;
